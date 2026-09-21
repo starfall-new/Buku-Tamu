@@ -31,6 +31,8 @@ $kodeTamu = $huruf . sprintf("%03s", $urutan);
 
 include_once('templates/header.php');
 ?>
+<!-- Page Heading -->
+<h1 class="h3 mb-4 text-grey-800">Data Tamu</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
