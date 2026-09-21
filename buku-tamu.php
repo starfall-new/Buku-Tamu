@@ -2,6 +2,21 @@
 require_once('function.php');
 
 // --- Logika Pembuatan Kode Tamu Otomatis ---
+
+if (isset($_POST['simpan'])) {
+    if (tambah_tamu($_POST) > 0) {
+        echo "<script>
+                alert('Data berhasil disimpan!');
+                document.location.href = 'buku-tamu.php';
+              </script>";
+        exit;
+    } else {
+        echo "<script>
+                alert('Data gagal disimpan!');
+              </script>";
+    }
+}
+
 $query = mysqli_query($koneksi, "SELECT max(id_tamu) as kodeTerbesar FROM buku_tamu");
 $data = mysqli_fetch_array($query);
 $kodeTamu = $data['kodeTerbesar'];
