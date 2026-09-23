@@ -25,9 +25,23 @@ include_once('templates/header.php');
             </div>
     <?php
         }
+    } else if (isset($_POST['ganti_password'])) {
+        if (ganti_password($_POST) > 0) {
+    ?>
+            <div class="alert alert-success" role="alert">
+                Password berhasil diubah!
+            </div>
+        <?php
+        } else {
+        ?>
+            <div class="alert alert-danger" role="alert">
+                Password gagal diubah!
+            </div>
+    <?php
+        }
     }
     ?>
-
+    
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
