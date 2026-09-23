@@ -37,8 +37,6 @@ $urutan++;
 // membuat kode baru dengan awalan 'zt' dan 3 digit angka (contoh: zt001, zt002)
 $huruf = "zt";
 $kodeTamu = $huruf . sprintf("%03s", $urutan);
-
-include_once('templates/header.php');
 ?>
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-grey-800">Data Tamu</h1>
@@ -84,7 +82,7 @@ include_once('templates/header.php');
                             <td><?= $tamu['kepentingan'] ?></td>
                             <td>
                                 <a class="btn btn-success" href="edit-tamu.php?id=<?= $tamu['id_tamu']?>">Ubah</a>
-                                <a onclick="confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger" href="hapus-tamu.php?id=<?= $tamu['id_tamu']?>">Hapus</a>
+                                <a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger" href="hapus-tamu.php?id=<?= $tamu['id_tamu']?>">Hapus</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -107,7 +105,7 @@ include_once('templates/header.php');
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="">
+            <form method="post" action="" enctype="multipart/form-data">
                 <div class="modal-body">
                     <!-- Value $kodeTamu otomatis terisi di sini -->
                     <input type="hidden" name="id_tamu" id="id_tamu" value="<?= $kodeTamu; ?>">
@@ -140,6 +138,14 @@ include_once('templates/header.php');
                         <label for="kepentingan" class="col-sm-3 col-form-label">Kepentingan</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="kepentingan" name="kepentingan" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="gambar" class="col-sm-3 col-form-label">Unggah Foto</label>
+                        <div class="custom-file col-sm-8">
+                            <input type="file" class="custom-file-input" id="gambar" name="gambar">
+                            <label class="custom-file-label" for="gambar">Choose file</label>
                         </div>
                     </div>
                 </div>
