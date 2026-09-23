@@ -76,7 +76,7 @@ function tambah_user($data){
     $password   = htmlspecialchars($data["password"]);
     $user_role  = htmlspecialchars($data["user_role"]);
 
-    // Enkripsi password dengan password_hash
+    // enkripsi password dengan password_hash
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     $query = "INSERT INTO users VALUES ('$kode','$username','$password_hash','$user_role')";

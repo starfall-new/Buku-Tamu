@@ -1,7 +1,7 @@
 <?php
 require_once('function.php');
 
-// 1. Ambil id_tamu dari URL dan query data tamunya
+// 1. ambil id_tamu dari URL dan query data tamunya
 if (isset($_GET['id'])) {
     $id_user = $_GET['id'];
     $data = query("SELECT * FROM users WHERE id_user = '$id_user'")[0];

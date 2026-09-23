@@ -1,32 +1,37 @@
 <?php
-// 1. Memulai session
+// memulai session
 session_start();
 
-// --- BAGIAN PERTAMA DARI GAMBAR ---
-// Jika user sudah login, arahkan langsung ke index.php
-if(isset($_SESSION['login'])){
-    header('Location: index.php');
+// cek bila ada user yang sudah login maka akan redirect ke halaman dashboard/index
+if (isset($_SESSION['login'])) {
+    header("Location: index.php");
     exit;
 }
 
+// panggil file koneksi database
 require 'koneksi.php';
 
+// pengecekan ketika tombol login ditekan
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $result = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username'");
 
+    // cek apakah ada username
     if (mysqli_num_rows($result) === 1) {
+
+        // cek apakah passwordnya benar
         $row = mysqli_fetch_assoc($result);
 
         if (password_verify($password, $row['password'])) {
-            
-            // --- BAGIAN KEDUA DARI GAMBAR ---
-            // Set variabel session ketika login berhasil
+
+            // set session 
             $_SESSION['login'] = true;
             $_SESSION['username'] = $username;
+            $_SESSION['role'] = $row['user_role'];
 
+            // login berhasil
             header("Location: index.php");
             exit;
         }

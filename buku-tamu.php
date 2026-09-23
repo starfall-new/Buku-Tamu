@@ -1,7 +1,16 @@
 <?php
+
+include_once('templates/header.php');
+
+// pengecekan user role bukan operator maka tidak boleh mengakses halaman
+if($_SESSION['role'] != 'operator') {
+   echo "<script>alert('anda tidak memiliki akses');</script>";
+   echo "<script>window.location.href='index.php';</script>";
+}
+
 require_once('function.php');
 
-// --- Logika Pembuatan Kode Tamu Otomatis ---
+// logika pembuatan kode tamu otomatis 
 
 if (isset($_POST['simpan'])) {
     if (tambah_tamu($_POST) > 0) {
@@ -21,11 +30,11 @@ $query = mysqli_query($koneksi, "SELECT max(id_tamu) as kodeTerbesar FROM buku_t
 $data = mysqli_fetch_array($query);
 $kodeTamu = $data['kodeTerbesar'];
 
-// Mengambil angka dari kode terbesar (misal 'zt001' -> 1)
+// mengambil angka dari kode terbesar (misal 'zt001' -> 1)
 $urutan = (int) substr($kodeTamu, 2, 3);
 $urutan++;
 
-// Membuat kode baru dengan awalan 'zt' dan 3 digit angka (contoh: zt001, zt002)
+// membuat kode baru dengan awalan 'zt' dan 3 digit angka (contoh: zt001, zt002)
 $huruf = "zt";
 $kodeTamu = $huruf . sprintf("%03s", $urutan);
 
