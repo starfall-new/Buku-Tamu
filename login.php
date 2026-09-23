@@ -1,20 +1,32 @@
 <?php
+// 1. Memulai session
+session_start();
+
+// --- BAGIAN PERTAMA DARI GAMBAR ---
+// Jika user sudah login, arahkan langsung ke index.php
+if(isset($_SESSION['login'])){
+    header('Location: index.php');
+    exit;
+}
+
 require 'koneksi.php';
-if(isset($_POST['login'])) {
+
+if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $result = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username'");
 
-    // cek apakah ada username
-    if(mysqli_num_rows($result) === 1) {
-
-        // cek apakah passwordnya benar
+    if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
 
-        if(password_verify($password, $row['password'])) {
+        if (password_verify($password, $row['password'])) {
+            
+            // --- BAGIAN KEDUA DARI GAMBAR ---
+            // Set variabel session ketika login berhasil
+            $_SESSION['login'] = true;
+            $_SESSION['username'] = $username;
 
-            // login berhasil
             header("Location: index.php");
             exit;
         }
