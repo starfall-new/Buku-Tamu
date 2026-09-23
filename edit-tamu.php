@@ -39,8 +39,9 @@ include_once('templates/header.php');
             <h6 class="m-0 font-weight-bold text-primary">Form Ubah Data Tamu</h6>
         </div>
         <div class="card-body">
-            <form method="post" action="">
+            <form method="post" action="" enctype="multipart/form-data">
                 <input type="hidden" name="id_tamu" id="id_tamu" value="<?= $id_tamu ?>">
+                <input type="hidden" name="gambarLama" id="gambarLama" value="<?= $data['gambar']; ?>"></input>
                 
                 <div class="form-group row">
                     <label for="nama_tamu" class="col-sm-3 col-form-label">Nama Tamu</label>
@@ -71,6 +72,13 @@ include_once('templates/header.php');
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="kepentingan" name="kepentingan" value="<?= $data['kepentingan'] ?>" required>
                     </div>
+                </div>
+                <div class="form-group row">
+                    <label for="gambar" class="col-sm-3 col-form-label">Gambar Foto</label>
+                        <div class="col-sm-8">
+                            <img src="assets/upload_gambar/<?= $data['gambar']; ?>" alt="" width="30%">
+                                <input type="file" name="gambar" class="form-control-file" id="gambar">
+                         </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-3 col-form-label"></label>
